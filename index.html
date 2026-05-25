@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPISTORE — Futuristic Crypto Trading Guide</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#06090f;
+color:#dfe8f1;
+font-family:'Inter',sans-serif;
+line-height:1.9;
+overflow-x:hidden;
+}
+
+body::before{
+content:'';
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at top left, rgba(0,255,255,0.12), transparent 25%),
+radial-gradient(circle at bottom right, rgba(120,0,255,0.15), transparent 25%);
+z-index:-1;
+}
+
+.container{
+width:90%;
+max-width:1100px;
+margin:auto;
+padding:60px 0;
+}
+
+.cover{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:40px;
+position:relative;
+}
+
+.cover h1{
+font-family:'Orbitron',sans-serif;
+font-size:78px;
+line-height:1.1;
+background:linear-gradient(90deg,#00f0ff,#8a5cff,#ffffff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:35px;
+text-shadow:0 0 25px rgba(0,255,255,0.25);
+}
+
+.cover .subtitle{
+font-size:24px;
+max-width:900px;
+color:#96c7ff;
+margin-bottom:25px;
+}
+
+.cover .tagline{
+font-size:18px;
+color:#7f93a8;
+max-width:700px;
+}
+
+h2{
+font-family:'Orbitron',sans-serif;
+font-size:38px;
+margin-top:80px;
+margin-bottom:25px;
+color:#00e5ff;
+border-left:4px solid #00e5ff;
+padding-left:18px;
+}
+
+h3{
+font-size:26px;
+margin-top:35px;
+margin-bottom:18px;
+color:#7ce6ff;
+}
+
+p{
+margin-bottom:22px;
+color:#d8e2ee;
+}
+
+.card{
+background:rgba(12,18,28,0.92);
+border:1px solid rgba(0,255,255,0.12);
+border-radius:22px;
+padding:35px;
+margin-top:35px;
+box-shadow:0 0 40px rgba(0,0,0,0.45);
+backdrop-filter:blur(8px);
+}
+
+.note{
+background:rgba(0,229,255,0.08);
+border-left:4px solid #00e5ff;
+padding:22px;
+border-radius:14px;
+margin:30px 0;
+}
+
+ul{
+padding-left:22px;
+margin-top:15px;
+margin-bottom:20px;
+}
+
+li{
+margin-bottom:12px;
+}
+
+.checklist li{
+list-style:'✔ ';
+padding-left:10px;
+}
+
+.table{
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:25px;
+}
+
+table th,
+table td{
+border:1px solid #1b2a3a;
+padding:16px;
+text-align:left;
+}
+
+table th{
+background:#0f2233;
+color:#00e5ff;
+}
+
+.signal-box{
+background:#081018;
+border:1px solid #183344;
+border-radius:18px;
+padding:28px;
+margin-top:28px;
+white-space:pre-line;
+}
+
+.footer{
+text-align:center;
+padding:100px 20px 60px;
+}
+
+.footer h1{
+font-family:'Orbitron',sans-serif;
+font-size:58px;
+background:linear-gradient(90deg,#00f0ff,#9d6bff,#ffffff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.glow{
+color:#00f0ff;
+font-weight:700;
+}
+
+.big-opening{
+font-family:'Orbitron',sans-serif;
+font-size:54px;
+line-height:1.3;
+margin-bottom:40px;
+background:linear-gradient(90deg,#ffffff,#00f0ff,#8a5cff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.quote{
+font-size:24px;
+color:#8ed8ff;
+margin-top:25px;
+font-style:italic;
+}
+
+</style>
+</head>
+<body>
+
+<section class="cover">
+<div class="big-opening">
+Ubah $1.000 Menjadi $10.000<br>
+Kenapa Tidak Menjadi $1.000.000?
+</div>
+
+<div class="subtitle">
+Karena market bukan mesin ATM. Market adalah arena probabilitas, disiplin, dan ketahanan mental.
+</div>
+
+<div class="tagline">
+<div class="card" style="margin-bottom:40px;">
+<h3 style="font-family:'Orbitron',sans-serif; font-size:30px; color:#00f0ff; margin-bottom:25px;">
+2 Bulan Backtest Konsisten Dengan Risk Management Ketat
+</h3>
+
+<p>
+Dua screenshot di bawah ini menunjukkan simulasi dan hasil pendekatan trading disiplin menggunakan sistem yang dijelaskan di ebook ini.
+Bukan profit satu malam. Bukan leverage gila.
+Tetapi konsistensi, kontrol resiko, dan pengulangan setup EV+.
+</p>
+
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:25px; margin-top:35px;">
+
+<div style="background:#0b1118; padding:18px; border-radius:18px; border:1px solid rgba(0,255,255,0.12);">
+<img src="ss1.png" alt="Backtest Bulan Pertama" style="width:100%; border-radius:14px; margin-bottom:15px;">
+
+<h3 style="font-size:22px; color:#7ce6ff; margin-bottom:10px;">
+Bulan Pertama
+</h3>
+
+<p style="color:#9db4c9;">
+Fokus utama:
+- disiplin entry
+- RR konsisten
+- mengurangi overtrade
+- menjaga equity curve tetap stabil
+</p>
+</div>
+
+<div style="background:#0b1118; padding:18px; border-radius:18px; border:1px solid rgba(0,255,255,0.12);">
+<img src="ss2.png" alt="Backtest Bulan Kedua" style="width:100%; border-radius:14px; margin-bottom:15px;">
+
+<h3 style="font-size:22px; color:#7ce6ff; margin-bottom:10px;">
+Bulan Kedua
+</h3>
+
+<p style="color:#9db4c9;">
+Equity curve mulai membentuk kenaikan lebih stabil.
+Fokus bukan mencari jackpot, tetapi menjaga probabilitas tetap sehat dalam jangka panjang.
+</p>
+</div>
+
+</div>
+
+<div class="note">
+<b>Hasil Konsisten Lebih Penting Dari Profit Viral.</b><br>
+Trader yang mampu menjaga kestabilan equity curve biasanya memiliki peluang bertahan jauh lebih lama dibanding trader yang hanya mengejar profit besar sesaat.
+</div>
+</div>
+
+Mayoritas trader gagal bukan karena strategi mereka jelek, tetapi karena mereka mencoba melompat terlalu jauh sebelum memiliki pondasi yang stabil.
+</div>
+</section>
+
+<div class="container">
+
+<div class="card">
+<p>
+Mengubah $1.000 menjadi $10.000 masih realistis dalam dunia trading crypto jika dilakukan dengan sistem, disiplin, dan pengelolaan resiko yang benar.
+</p>
+
+<p>
+Tetapi mengubah $1.000 menjadi $1.000.000 biasanya membutuhkan leverage ekstrem, overtrade, atau perjudian tersembunyi yang pada akhirnya menghancurkan akun trader retail.
+</p>
+
+<p>
+Trader pemula sering terjebak pada mimpi profit besar dalam waktu singkat. Mereka melihat screenshot profit besar di internet, tetapi tidak melihat ribuan akun yang hancur di belakang layar.
+</p>
+
+<div class="note">
+<b>Trader profesional fokus pada survival terlebih dahulu.</b><br>
+Karena trader yang masih hidup di market selama bertahun-tahun memiliki peluang jauh lebih besar membangun kekayaan dibanding trader yang mencari jackpot dalam semalam.
+</div>
+
+<p>
+Panduan ini dibuat dengan pendekatan realistis, sederhana, dan langsung bisa dipakai.
+Bukan teori rumit yang hanya terlihat pintar di media sosial.
+</p>
+</div>
+
+<h2>TRICK 1 — SWEEP + ENGULFING</h2>
+
+<div class="card">
+<h3>Konsep Inti</h3>
+
+<p>
+Market crypto sering melakukan penyapuan liquidity sebelum bergerak ke arah sebenarnya.
+Mayoritas trader retail biasanya masuk terlalu cepat.
+Market maker mengetahui area stoploss mereka.
+Karena itu sering terjadi sweep sebelum harga bergerak.
+</p>
+
+<h3>Aturan Wajib</h3>
+
+<ul class="checklist">
+<li>Hanya trade pada coin yang sedang trend</li>
+<li>Hanya trade pada coin dengan volume transaksi jelas</li>
+<li>Hindari market sideways</li>
+<li>Lebih efektif di timeframe H1, H4, dan D1</li>
+</ul>
+
+<h3>Setup Buy</h3>
+
+<ul>
+<li>Ada candle merah</li>
+<li>Candle berikutnya hijau</li>
+<li>Low candle hijau menyapu low candle merah</li>
+<li>Langsung entry buy setelah candle close</li>
+</ul>
+
+<div class="signal-box">
+Entry Buy
+SL = di bawah wick candle engulfing
+TP1 = RR 1:1
+TP2 = RR 1:2
+TP3 = RR 1:3
+</div>
+
+<h3>Kenapa Setup Ini Efektif?</h3>
+
+<p>
+Karena market sering mengambil liquidity di bawah low sebelumnya untuk menjebak seller dan memancing panic selling.
+Setelah liquidity tersapu, market justru bergerak naik.
+</p>
+
+<p>
+Setup ini sederhana tetapi memiliki EV+ jika dipakai konsisten pada market yang sedang trend.
+</p>
+
+<h3>Setup Sell</h3>
+
+<p>
+Kebalikannya.
+Candle hijau diikuti candle merah yang wick atasnya menyapu high candle sebelumnya.
+Setelah itu entry sell.
+</p>
+</div>
+
+<h2>TRICK 2 — FAKE BREAKOUT MENJADI SWEEP</h2>
+
+<div class="card">
+<h3>Konsep Inti</h3>
+
+<p>
+Mayoritas trader retail menyukai breakout.
+Masalahnya, market crypto sangat sering memberikan fake breakout.
+Justru di situlah peluang muncul.
+</p>
+
+<h3>Aturan Wajib</h3>
+
+<ul class="checklist">
+<li>Hanya trade coin trend</li>
+<li>Volume market harus jelas</li>
+<li>Jangan entry saat market terlalu liar</li>
+</ul>
+
+<h3>Setup Buy</h3>
+
+<ul>
+<li>Ada candle bullish</li>
+<li>Candle berikutnya juga bullish</li>
+<li>Namun wick bawah candle kedua menyapu seluruh body dan wick candle sebelumnya</li>
+<li>Seolah breakout gagal dan berubah menjadi sweep liquidity</li>
+</ul>
+
+<div class="signal-box">
+Entry Buy
+SL = di bawah wick candle kedua
+TP1 = RR 1:1
+TP2 = RR 1:2
+TP3 = RR 1:3
+</div>
+
+<h3>Kenapa Setup Ini Menarik?</h3>
+
+<p>
+Karena trader retail biasanya panik saat melihat candle turun tiba-tiba.
+Padahal sering kali itu hanyalah proses pengambilan liquidity sebelum market melanjutkan trend.
+</p>
+</div>
+
+<h2>TRICK 3 — RSI EXTREME + TREND CONTINUATION</h2>
+
+<div class="card">
+<h3>Kesalahan Trader Pemula</h3>
+
+<p>
+Trader pemula sering menganggap RSI overbought berarti harus sell.
+Padahal dalam market trend kuat, RSI bisa tetap tinggi sangat lama.
+</p>
+
+<h3>Setup Buy</h3>
+
+<ul>
+<li>Trend market jelas bullish</li>
+<li>RSI turun ke area 40–50</li>
+<li>Volume mulai naik kembali</li>
+<li>Candle rejection bullish muncul</li>
+</ul>
+
+<div class="signal-box">
+Fokus mengikuti trend utama.
+Bukan melawan trend.
+</div>
+
+<h3>Kenapa EV+?</h3>
+
+<p>
+Karena market trend biasanya bergerak dalam gelombang.
+RSI pullback di trend kuat sering menjadi area continuation yang lebih aman dibanding mengejar candle hijau panjang.
+</p>
+</div>
+
+<h2>TRICK 4 — LIQUIDITY SWEEP DI SESSION MARKET</h2>
+
+<div class="card">
+<h3>Konsep</h3>
+
+<p>
+Market crypto memiliki momen tertentu ketika volume meningkat drastis.
+Biasanya saat sesi London atau New York mulai aktif.
+</p>
+
+<h3>Setup</h3>
+
+<ul>
+<li>Tandai high dan low Asia session</li>
+<li>Tunggu sweep salah satu sisi</li>
+<li>Jika terjadi rejection kuat, entry berlawanan arah sweep</li>
+</ul>
+
+<div class="signal-box">
+Sweep High Asia → Rejection → Sell
+Sweep Low Asia → Rejection → Buy
+</div>
+
+<h3>Kenapa Banyak Dipakai?</h3>
+
+<p>
+Karena liquidity session sering menjadi target market maker.
+Setelah liquidity diambil, market sering bergerak cukup agresif.
+</p>
+</div>
+
+<h2>TRICK 5 — VOLUME SPIKE + INSIDE CANDLE BREAK</h2>
+
+<div class="card">
+<h3>Konsep</h3>
+
+<p>
+Volume adalah bahan bakar market.
+Ketika volume besar muncul setelah market tenang, biasanya ada potensi pergerakan signifikan.
+</p>
+
+<h3>Setup Buy</h3>
+
+<ul>
+<li>Muncul candle volume spike</li>
+<li>Berikutnya terbentuk inside candle kecil</li>
+<li>Jika high inside candle ditembus → buy</li>
+</ul>
+
+<div class="signal-box">
+SL = low inside candle
+TP = gunakan RR bertahap
+</div>
+
+<h3>Kenapa Menarik?</h3>
+
+<p>
+Karena market sering melakukan compression sebelum expansion.
+Inside candle setelah volume spike sering menjadi tanda market sedang bersiap bergerak.
+</p>
+</div>
+
+<h2>ATURAN PENTING YANG JAUH LEBIH BERHARGA DARI ENTRY</h2>
+
+<div class="card">
+<h3>1. Jangan Trade Semua Coin</h3>
+<p>
+Fokus pada coin dengan volume jelas dan pergerakan bersih.
+Terlalu banyak pair justru membuat fokus rusak.
+</p>
+
+<h3>2. Jangan Memaksakan Trade</h3>
+<p>
+Tidak ada setup juga bagian dari trading.
+Profesional tidak dibayar karena sering entry.
+Profesional dibayar karena memilih peluang terbaik.
+</p>
+
+<h3>3. Jangan Overleverage</h3>
+<p>
+Leverage tinggi membuat trader kehilangan kemampuan berpikir objektif.
+Market crypto sudah cukup volatile bahkan tanpa leverage ekstrem.
+</p>
+
+<h3>4. Fokus Konsistensi</h3>
+<p>
+Trader yang bisa menghasilkan 2%–5% stabil per minggu jauh lebih berbahaya dibanding trader yang sesekali profit besar tetapi tidak konsisten.
+</p>
+</div>
+
+<h2>PENUTUP</h2>
+
+<div class="card">
+<p>
+Jika mengikuti gaya trading penulis, lebih baik melakukan 1.000 trade dengan aturan yang konsisten dibanding menunggu 1 peluang emas.
+</p>
+
+<p>
+Banyak trader retail terjebak mencari “perfect setup”.
+Mereka menunggu satu peluang yang dianggap pasti berhasil.
+Masalahnya, ketika peluang itu gagal, mental mereka ikut runtuh.
+</p>
+
+<p>
+Trader profesional memahami bahwa market adalah permainan probabilitas.
+Tidak ada setup yang menang terus.
+Yang membuat trader bertahan bukan satu trade besar, tetapi kemampuan menjalankan sistem yang sama secara disiplin dalam jangka panjang.
+</p>
+
+<p>
+Konsistensi kecil yang dilakukan ribuan kali jauh lebih kuat dibanding satu keputusan emosional berisiko besar.
+</p>
+
+<div class="note">
+Trader yang bertahan lama biasanya bukan trader paling agresif.
+Tetapi trader yang paling mampu mengendalikan dirinya sendiri.
+</div>
+</div>
+
+<section class="footer">
+<h1>BY IPISTORE</h1>
+
+<div class="quote">
+Futuristic Trading Mindset • Probability • Discipline • Survival
+</div>
+</section>
+
+</body>
+</html>
