@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraud Trading Simulator - Edukasi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0e16;
+            color: #dfe8f1;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1600px;
+            margin: auto;
+            min-height: 100vh;
+        }
+
+        /* ===== CONTROL PANEL ===== */
+        .control-panel {
+            background: rgba(12, 18, 28, 0.95);
+            border: 1px solid rgba(0, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 95vh;
+        }
+
+        .control-panel h2 {
+            color: #00e5ff;
+            margin-bottom: 20px;
+            font-size: 20px;
+            border-bottom: 2px solid #00e5ff;
+            padding-bottom: 10px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .section h3 {
+            color: #7ce6ff;
+            font-size: 14px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            color: #9db4c9;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px;
+            background: rgba(20, 30, 45, 0.8);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            color: #dfe8f1;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        input[type="number"]:focus,
+        input[type="text"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #00e5ff;
+            background: rgba(20, 30, 45, 0.95);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        button {
+            flex: 1;
+            padding: 10px;
+            background: rgba(0, 229, 255, 0.15);
+            border: 1px solid #00e5ff;
+            color: #00e5ff;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: rgba(0, 229, 255, 0.25);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+        }
+
+        button.danger {
+            background: rgba(255, 80, 80, 0.15);
+            border-color: #ff5050;
+            color: #ff5050;
+        }
+
+        button.danger:hover {
+            background: rgba(255, 80, 80, 0.25);
+            box-shadow: 0 0 10px rgba(255, 80, 80, 0.4);
+        }
+
+        button.primary {
+            background: rgba(0, 229, 255, 0.25);
+            width: 100%;
+        }
+
+        .cycle-item {
+            background: rgba(20, 30, 45, 0.6);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        .cycle-item h4 {
+            color: #00e5ff;
+            font-size: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* ===== TRADING VIEW ===== */
+        .trading-view {
+            background: rgba(12, 18, 28, 0.95);
+            border: 1px solid rgba(0, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            max-height: 95vh;
+        }
+
+        .trade-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .trade-header h1 {
+            color: #00e5ff;
+            font-size: 24px;
+        }
+
+        .trade-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .trade-controls button {
+            padding: 8px 15px;
+            font-size: 12px;
+        }
+
+        .trade-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: rgba(20, 30, 45, 0.6);
+            border: 1px solid rgba(0, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-label {
+            color: #7f93a8;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            color: #00e5ff;
+            font-size: 22px;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+        }
+
+        .stat-value.profit {
+            color: #00ff88;
+        }
+
+        .stat-value.loss {
+            color: #ff5050;
+        }
+
+        .trading-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow-y: auto;
+        }
+
+        .position-card {
+            background: rgba(20, 30, 45, 0.6);
+            border: 1px solid rgba(0, 255, 255, 0.15);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .position-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .position-type {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .position-type.buy {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+
+        .position-type.sell {
+            background: rgba(255, 80, 80, 0.2);
+            color: #ff5050;
+        }
+
+        .position-price {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #9db4c9;
+            margin-bottom: 8px;
+        }
+
+        .position-pnl {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .pnl-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .pnl-label {
+            color: #7f93a8;
+        }
+
+        .pnl-value {
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff88, #00e5ff);
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+
+        .watermark {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 100, 100, 0.3);
+            border: 2px solid rgba(255, 100, 100, 0.6);
+            color: #ff6464;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 9999;
+            pointer-events: none;
+            text-shadow: 0 0 10px rgba(255, 100, 100, 0.5);
+        }
+
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .control-panel {
+                max-height: 50vh;
+            }
+
+            .trading-view {
+                max-height: 50vh;
+            }
+        }
+
+        .empty-state {
+            color: #7f93a8;
+            text-align: center;
+            padding: 40px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+
+    <!-- ===== CONTROL PANEL ===== -->
+    <div class="control-panel">
+        <h2>SIMULASI PERDAGANGAN</h2>
+
+        <div class="section">
+            <h3>Konfigurasi Umum</h3>
+            <div class="form-group">
+                <label>Ticker</label>
+                <input type="text" id="ticker" value="XAUUSD" placeholder="XAUUSD">
+            </div>
+            <div class="form-group">
+                <label>Total Siklus</label>
+                <input type="number" id="totalCycles" value="1" min="1" max="10">
+            </div>
+            <button class="primary" onclick="addCycle()">+ TAMBAH SIKLUS</button>
+        </div>
+
+        <div id="cyclesContainer"></div>
+
+        <div class="section">
+            <h3>Konfigurasi Font</h3>
+            <div class="form-group">
+                <label>Ukuran Font</label>
+                <input type="number" id="fontSize" value="14" min="10" max="20">
+            </div>
+            <div class="form-group">
+                <label>Ketebalan (100-900)</label>
+                <input type="number" id="fontWeight" value="400" min="100" max="900" step="100">
+            </div>
+            <div class="form-group">
+                <label>Warna Teks</label>
+                <input type="text" id="fontColor" value="#dfe8f1">
+            </div>
+            <div class="form-group">
+                <label>Warna PnL Profit</label>
+                <input type="text" id="profitColor" value="#00ff88">
+            </div>
+            <div class="form-group">
+                <label>Warna PnL Loss</label>
+                <input type="text" id="lossColor" value="#ff5050">
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Kontrol Simulasi</h3>
+            <button class="primary" onclick="startSimulation()">MULAI SIMULASI</button>
+            <button class="danger" style="margin-top: 8px;" onclick="resetSimulation()">RESET</button>
+        </div>
+    </div>
+
+    <!-- ===== TRADING VIEW ===== -->
+    <div class="trading-view">
+        <div class="trade-header">
+            <h1 id="tradeTitle">Trade</h1>
+            <div class="trade-controls">
+                <button onclick="pauseSimulation()">PAUSE</button>
+                <button onclick="resumeSimulation()">RESUME</button>
+            </div>
+        </div>
+
+        <div class="trade-stats">
+            <div class="stat-box">
+                <div class="stat-label">Total PnL</div>
+                <div class="stat-value" id="totalPnL">0 USD</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Equity</div>
+                <div class="stat-value" id="equity">10000 USD</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Margin Bebas</div>
+                <div class="stat-value" id="marginBebas">10000 USD</div>
+            </div>
+        </div>
+
+        <div class="trading-container" id="tradingContainer">
+            <div class="empty-state">Belum ada simulasi. Konfigurasi siklus dan tekan "MULAI SIMULASI"</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="watermark">⚠️ SIMULASI EDUKASI - BUKAN DATA REAL ⚠️</div>
+
+<script>
+    let cycles = [];
+    let simulationRunning = false;
+    let simulationPaused = false;
+    let positions = [];
+    let totalEquity = 10000;
+    let currentCycleIndex = 0;
+
+    function addCycle() {
+        const totalCycles = parseInt(document.getElementById('totalCycles').value);
+        const container = document.getElementById('cyclesContainer');
+
+        container.innerHTML = '';
+
+        for (let i = 0; i < totalCycles; i++) {
+            cycles[i] = cycles[i] || {
+                type: 'buy',
+                layer: 1,
+                lot: 0.01,
+                open: 2000,
+                close: 2050,
+                duration: 5
+            };
+
+            const cycleHTML = `
+                <div class="cycle-item">
+                    <h4>Siklus ${i + 1}
+                        <button style="width:auto; padding:4px 8px; font-size:11px;" class="danger" onclick="removeCycle(${i})">Hapus</button>
+                    </h4>
+                    <div class="form-group">
+                        <label>Tipe Order</label>
+                        <select onchange="cycles[${i}].type = this.value">
+                            <option value="buy" ${cycles[i].type === 'buy' ? 'selected' : ''}>BUY</option>
+                            <option value="sell" ${cycles[i].type === 'sell' ? 'selected' : ''}>SELL</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Total Layer</label>
+                        <input type="number" value="${cycles[i].layer}" min="1" onchange="cycles[${i}].layer = parseInt(this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Total Lot (per layer)</label>
+                        <input type="number" value="${cycles[i].lot}" step="0.01" min="0.01" onchange="cycles[${i}].lot = parseFloat(this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Open Price</label>
+                        <input type="number" value="${cycles[i].open}" step="0.01" onchange="cycles[${i}].open = parseFloat(this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Close Price</label>
+                        <input type="number" value="${cycles[i].close}" step="0.01" onchange="cycles[${i}].close = parseFloat(this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Durasi (detik)</label>
+                        <input type="number" value="${cycles[i].duration}" min="1" onchange="cycles[${i}].duration = parseInt(this.value)">
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML += cycleHTML;
+        }
+    }
+
+    function removeCycle(index) {
+        cycles.splice(index, 1);
+        document.getElementById('totalCycles').value = cycles.length;
+        addCycle();
+    }
+
+    function startSimulation() {
+        if (cycles.length === 0) {
+            alert('Tambahkan minimal 1 siklus!');
+            return;
+        }
+
+        simulationRunning = true;
+        simulationPaused = false;
+        positions = [];
+        totalEquity = 10000;
+        currentCycleIndex = 0;
+
+        document.getElementById('tradingContainer').innerHTML = '';
+        runNextCycle();
+    }
+
+    function pauseSimulation() {
+        simulationPaused = true;
+    }
+
+    function resumeSimulation() {
+        simulationPaused = false;
+    }
+
+    function resetSimulation() {
+        simulationRunning = false;
+        simulationPaused = false;
+        positions = [];
+        totalEquity = 10000;
+        currentCycleIndex = 0;
+        document.getElementById('tradingContainer').innerHTML = '<div class="empty-state">Simulasi direset. Tekan "MULAI SIMULASI" untuk memulai ulang</div>';
+        updateStats();
+    }
+
+    function runNextCycle() {
+        if (currentCycleIndex >= cycles.length || !simulationRunning) return;
+
+        const cycle = cycles[currentCycleIndex];
+        const ticker = document.getElementById('ticker').value;
+
+        // Buka posisi
+        const positionId = Date.now() + Math.random();
+        const position = {
+            id: positionId,
+            type: cycle.type,
+            ticker: ticker,
+            layer: cycle.layer,
+            lot: cycle.lot,
+            openPrice: cycle.open,
+            closePrice: cycle.close,
+            currentPrice: cycle.open,
+            duration: cycle.duration * 1000,
+            startTime: Date.now(),
+            status: 'open'
+        };
+
+        positions.push(position);
+        renderPosition(position);
+        updateStats();
+
+        // Animate price movement
+        animatePrice(position, () => {
+            position.status = 'closed';
+            renderPosition(position);
+
+            // Calculate PnL
+            calculatePnL();
+
+            currentCycleIndex++;
+
+            // Delay sebelum siklus berikutnya
+            setTimeout(() => {
+                if (simulationRunning) {
+                    runNextCycle();
+                }
+            }, 2000);
+        });
+    }
+
+    function animatePrice(position, callback) {
+        const startPrice = position.openPrice;
+        const endPrice = position.closePrice;
+        const startTime = Date.now();
+        const duration = position.duration;
+
+        const animate = () => {
+            if (!simulationRunning) return;
+
+            if (simulationPaused) {
+                setTimeout(animate, 100);
+                return;
+            }
+
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Add random fluctuation
+            const fluctuation = (Math.random() - 0.5) * (endPrice - startPrice) * 0.3;
+            position.currentPrice = startPrice + (endPrice - startPrice) * progress + fluctuation;
+
+            renderPosition(position);
+            updateStats();
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            } else {
+                position.currentPrice = endPrice;
+                renderPosition(position);
+                callback();
+            }
+        };
+
+        animate();
+    }
+
+    function renderPosition(position) {
+        let element = document.getElementById(`pos-${position.id}`);
+
+        if (!element) {
+            const container = document.getElementById('tradingContainer');
+            if (container.querySelector('.empty-state')) {
+                container.innerHTML = '';
+            }
+
+            element = document.createElement('div');
+            element.id = `pos-${position.id}`;
+            element.className = 'position-card';
+            container.appendChild(element);
+        }
+
+        const pnl = calculatePositionPnL(position);
+        const pnlPercent = ((pnl / (position.openPrice * position.lot * position.layer)) * 100).toFixed(2);
+
+        element.innerHTML = `
+            <div class="position-header">
+                <span class="position-type ${position.type}">${position.type.toUpperCase()} ${position.layer}L × ${position.lot}</span>
+                <span style="color: ${pnl >= 0 ? '#00ff88' : '#ff5050'};">${pnl >= 0 ? '+' : ''}${pnl.toFixed(2)} USD</span>
+            </div>
+            <div class="position-price">
+                ${position.ticker} | Open: ${position.openPrice.toFixed(2)} → Current: ${position.currentPrice.toFixed(2)} → Close: ${position.closePrice.toFixed(2)}
+            </div>
+            <div class="position-pnl">
+                <div class="pnl-item">
+                    <span class="pnl-label">Floating:</span>
+                    <span class="pnl-value" style="color: ${pnl >= 0 ? '#00ff88' : '#ff5050'};">${pnl >= 0 ? '+' : ''}${pnl.toFixed(2)} (${pnlPercent}%)</span>
+                </div>
+                <div class="pnl-item">
+                    <span class="pnl-label">Status:</span>
+                    <span class="pnl-value" style="color: ${position.status === 'open' ? '#00e5ff' : '#00ff88'};">${position.status.toUpperCase()}</span>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: ${Math.min(100, (Date.now() - position.startTime) / position.duration * 100)}%"></div>
+            </div>
+        `;
+    }
+
+    function calculatePositionPnL(position) {
+        const priceDiff = position.currentPrice - position.openPrice;
+        const direction = position.type === 'buy' ? 1 : -1;
+        const pnl = (priceDiff * direction * position.lot * position.layer);
+        return pnl;
+    }
+
+    function calculatePnL() {
+        let totalPnL = 0;
+        positions.forEach(pos => {
+            if (pos.status === 'closed') {
+                totalPnL += calculatePositionPnL(pos);
+            }
+        });
+        totalEquity = 10000 + totalPnL;
+        updateStats();
+    }
+
+    function updateStats() {
+        const totalPnL = positions.reduce((sum, pos) => {
+            if (pos.status === 'closed') {
+                return sum + calculatePositionPnL(pos);
+            }
+            return sum;
+        }, 0);
+
+        const floatingPnL = positions.reduce((sum, pos) => {
+            if (pos.status === 'open') {
+                return sum + calculatePositionPnL(pos);
+            }
+            return sum;
+        }, 0);
+
+        const totalPnLDisplay = totalPnL + floatingPnL;
+
+        document.getElementById('tradeTitle').textContent = `Trade -${Math.abs(totalPnLDisplay).toFixed(2)} ${totalPnLDisplay >= 0 ? 'USD' : 'USD'}`;
+        document.getElementById('totalPnL').textContent = `${totalPnLDisplay >= 0 ? '+' : ''}${totalPnLDisplay.toFixed(2)} USD`;
+        document.getElementById('totalPnL').className = `stat-value ${totalPnLDisplay >= 0 ? 'profit' : 'loss'}`;
+
+        document.getElementById('equity').textContent = `${totalEquity.toFixed(2)} USD`;
+        document.getElementById('marginBebas').textContent = `${totalEquity.toFixed(2)} USD`;
+    }
+
+    // Initialize
+    addCycle();
+    updateStats();
+</script>
+
+</body>
+</html>
